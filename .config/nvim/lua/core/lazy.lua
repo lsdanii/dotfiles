@@ -15,7 +15,13 @@ vim.opt.rtp:prepend(lazypath)
 local plugins = {
 	{
 		import = "plugins",
-	}, -- Automatically import plugins from plugins/ folder,
+	}, 
+
+	{
+		import = "plugins.lsp"  
+	},
 }
+
 require("lazy").setup(plugins,  {})
+
 

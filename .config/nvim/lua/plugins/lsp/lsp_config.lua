@@ -15,13 +15,40 @@ return {
 	config = function()
 		local lsp = require("lspconfig")
 		local keymap = vim.keymap;
-		-- A custom previewer for mini.pick that shows context lines
+
+		function references(bufnr, winnr)
+			local bufnr = bufnr or 0
+			local winnr = winnr or 0
+			local params = vim.lsp.util.make_position_params(winnr)
+			params.context = { includeDeclaration = true }
+			local MiniPick = require 'mini.pick'
+
+			vim.lsp.buf_request(bufnr, 'textDocument/references', params, function(err, result)
+				if err then
+					vim.print 'err\n'
+					vim.print(err)
+					return
+				end
+				if result == nil or vim.tbl_isempty(result) then
+					vim.print 'empty result'
+					return
+				end
+				local items = {}
+				local locations = vim.lsp.util.locations_to_items(result, 'utf-8')
+				for _, location in ipairs(locations) do
+					table.insert(items,
+						string.format('%s:%d:%d:%s', location.filename, location.lnum, location.col, location.text))
+				end
+				MiniPick.start({ source = { items = items, name = 'LSP References' } })
+			end)
+		end
 
 		local on_attach = function(_, buf)
 			local opts = { noremap = true, silent = true, buffer = buf }
-			keymap.set("n", "gd", "<cmd>Telescope lsp_definitions<CR>", opts);
-			keymap.set("n", "gr", "<cmd>Telescope lsp_references<CR>", opts);
+			keymap.set("n", "gd", vim.lsp.buf.definition, opts);
+			keymap.set("n", "gr", references, opts);
 			keymap.set("n", "gD", vim.lsp.buf.declaration, opts);
+			keymap.set('n', 'gi', vim.lsp.buf.implementation, opts)
 			keymap.set("n", "<leader>d", vim.diagnostic.open_float, opts);
 			keymap.set("n", "<leader>a", vim.lsp.buf.code_action, opts);
 			keymap.set("n", "<leader>r", vim.lsp.buf.rename, opts);
