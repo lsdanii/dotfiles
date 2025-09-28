@@ -26,7 +26,7 @@ output * bg /usr/share/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png fill
 #
 # Example configuration:
 #
-output HDMI-A-2 resolution 1920x1080@100Hz position 0,0
+# output HDMI-A-2 resolution 1920x1080@100Hz position 0,0
 output HDMI-A-1 resolution 1920x1080@144Hz position 1920,0
 #
 # You can get the names of your outputs by running: swaymsg -t get_outputs
@@ -59,8 +59,8 @@ exec swaymsg "workspace 2; exec alacritty;"
 #   }
 #
   input type:keyboard {
-      xkb_layout "us"
-      xkb_variant "altgr-intl"
+    xkb_layout "us"
+    xkb_options "compose:rctrl"
   }
 #
 # You can also configure each device individually.
@@ -70,7 +70,7 @@ exec swaymsg "workspace 2; exec alacritty;"
 #
 # Basics:
 #
-    # Start a terminal
+    # Start a terminalhata
     bindsym $mod+Return exec $term
 
     # Kill focused window
@@ -226,7 +226,7 @@ bindsym $mod+r mode "resize"
     bindsym --locked XF86MonBrightnessDown exec brightnessctl set 5%-
     bindsym --locked XF86MonBrightnessUp exec brightnessctl set 5%+
     # Special key to take a screenshot with grim
-    bindsym Print exec grim -g "$(slurp -d)" - | wl-copy -t image/png
+    bindsym Ctrl+p exec grim -g "$(slurp -d)" - | wl-copy -t image/png
 
 #
 # Status Bar:

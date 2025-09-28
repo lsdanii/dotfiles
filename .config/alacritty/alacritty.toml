@@ -7,7 +7,7 @@ import = [
 size = 12
 
 [font.normal]
-family = "Fira Code"
+family = "Fira Code Nerd Font"
 
 [[keyboard.bindings]]
 action = "None"
