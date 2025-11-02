@@ -29,13 +29,15 @@ window#waybar {
 #disk,
 #tray {
 	background: #1a1a1a;
+
+	border-bottom: 1px solid #504945;
 }
 
 #workspaces button {
 	padding: 0 2px;
 	color: #fdf6e3;
 }
-#workspaces button.active {
+#workspaces button.focused {
 	color: #d18e00;
 }
 #workspaces button:hover {

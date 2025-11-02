@@ -19,10 +19,24 @@ set $term alacritty
 # set $menu wmenu-run
 set $menu rofi -show drun
 
+xwayland enable
+
+### Style Configuration 
+default_border pixel 1
+gaps inner 1
+gaps outer 3
+
+client.focused          #928374 #1d2021 #d5c4a1 #928374   #928374
+client.focused_inactive #3c3836 #1d2021 #a89984 #3c3836   #3c3836
+client.unfocused        #3c3836 #1d2021 #7c6f64 #3c3836   #3c3836
+client.urgent           #cc241d #1d2021 #d5c4a1 #cc241d   #cc241d
+client.placeholder      #1d2021 #1d2021 #7c6f64 #1d2021   #1d2021
+
 ### Output configuration
 #
 # Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
-output * bg /usr/share/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png fill
+# output * bg /usr/share/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png fill
+output * bg $HOME/Pictures/linux.png fill
 #
 # Example configuration:
 #
@@ -62,6 +76,10 @@ exec swaymsg "workspace 2; exec alacritty;"
     xkb_layout "us"
     xkb_options "compose:rctrl"
   }
+
+input * repeat_delay 350
+input * repeat_rate 35
+
 #
 # You can also configure each device individually.
 # Read `man 5 sway-input` for more information about this section.
@@ -170,7 +188,7 @@ exec swaymsg "workspace 2; exec alacritty;"
     bindsym $mod+f fullscreen
 
     # Toggle the current focus between tiling and floating mode
-    bindsym $mod+Shift+space floating toggle
+    bindsym $mod+Shift+f floating toggle
 
     # Swap focus between the tiling area and the floating area
     bindsym $mod+space focus mode_toggle
@@ -218,10 +236,19 @@ bindsym $mod+r mode "resize"
 # Utilities:
 #
     # Special keys to adjust volume via PulseAudio
-    bindsym --locked XF86AudioMute exec pactl set-sink-mute \@DEFAULT_SINK@ toggle
-    bindsym --locked XF86AudioLowerVolume exec pactl set-sink-volume \@DEFAULT_SINK@ -5%
-    bindsym --locked XF86AudioRaiseVolume exec pactl set-sink-volume \@DEFAULT_SINK@ +5%
+
     bindsym --locked XF86AudioMicMute exec pactl set-source-mute \@DEFAULT_SOURCE@ toggle
+    bindsym --locked shift+f9 exec pactl set-sink-volume \@DEFAULT_SINK@ +5%
+
+    bindsym --locked XF86AudioMute exec pactl set-sink-mute \@DEFAULT_SINK@ toggle
+    bindsym --locked shift+F10 exec pactl set-sink-mute \@DEFAULT_SINK@ toggle
+
+    bindsym --locked XF86AudioLowerVolume exec pactl set-sink-volume \@DEFAULT_SINK@ -5%
+    bindsym --locked shift+F11 exec pactl set-sink-volume \@DEFAULT_SINK@ -5%
+
+    bindsym --locked XF86AudioRaiseVolume exec pactl set-sink-volume \@DEFAULT_SINK@ +5%
+    bindsym --locked shift+F12 exec pactl set-sink-volume \@DEFAULT_SINK@ +5%
+
     # Special keys to adjust brightness via brightnessctl
     bindsym --locked XF86MonBrightnessDown exec brightnessctl set 5%-
     bindsym --locked XF86MonBrightnessUp exec brightnessctl set 5%+
@@ -233,17 +260,18 @@ bindsym $mod+r mode "resize"
 #
 # Read `man 5 sway-bar` for more information about this section.
 bar {
-    position bottom
-
+	swaybar_command waybar
+    # position bottom
     # When the status_command prints a new line to stdout, swaybar updates.
     # The default just shows the current date and time.
-    status_command while date +'%Y-%m-%d %X'; do sleep 1; done
+    # status_command while date +'%Y-%m-%d %X'; do sleep 1; done
+	# status_command ~/.sway/volume-status.sh
 
-    colors {
-        statusline #ffffff
-        background #323232
-        inactive_workspace #32323200 #32323200 #5c5c5c
-    }
+    # colors {
+    #     statusline #ffffff
+    #     background #323232
+    #     inactive_workspace #32323200 #32323200 #5c5c5c
+    # }
 }
 
 include /etc/sway/config.d/*
