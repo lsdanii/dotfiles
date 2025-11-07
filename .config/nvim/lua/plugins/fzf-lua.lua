@@ -13,8 +13,8 @@ return {
 		end, {})
 	end,
 	keys = {
-		{ "<leader>f",  function() require('fzf-lua').files() end },
-		{ "<leader>pf", function() require('fzf-lua').git_files() end },
+		{ "<leader>f",  function() require('fzf-lua').git_files() end },
+		{ "<leader>pf", function() require('fzf-lua').files() end },
 		{ "<leader>/",  function() require('fzf-lua').live_grep() end },
 		{ "<leader>s",  function() require('fzf-lua').lsp_document_symbols() end },
 		{ "<leader>b",  function() require('fzf-lua').buffers() end },

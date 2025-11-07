@@ -1,8 +1,8 @@
 return {
-	"rebelot/kanagawa.nvim",
+	"sainnhe/gruvbox-material",
 	lazy = false,
 	priority = 1000,
 	config = function()
-		vim.cmd.colorscheme('kanagawa-dragon')
+		vim.cmd.colorscheme('gruvbox-material')
 	end
 }

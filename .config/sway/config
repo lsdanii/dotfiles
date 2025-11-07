@@ -35,8 +35,8 @@ client.placeholder      #1d2021 #1d2021 #7c6f64 #1d2021   #1d2021
 ### Output configuration
 #
 # Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
-# output * bg /usr/share/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png fill
-output * bg $HOME/Pictures/linux.png fill
+output * bg /usr/share/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png fill
+# output * bg $HOME/Pictures/linux.png fill
 #
 # Example configuration:
 #
@@ -88,8 +88,9 @@ input * repeat_rate 35
 #
 # Basics:
 #
-    # Start a terminalhata
+    # Start a terminal
     bindsym $mod+Return exec $term
+    bindsym $mod+o exec dolphin
 
     # Kill focused window
     bindsym $mod+q kill
