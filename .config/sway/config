@@ -72,13 +72,16 @@ exec swaymsg "workspace 2; exec alacritty;"
 #       middle_emulation enabled
 #   }
 #
-  input type:keyboard {
-    xkb_layout "us"
-    xkb_options "compose:rctrl"
-  }
+
+input * {
+    xkb_layout us,es
+    xkb_options grp:toggle
+}
 
 input * repeat_delay 350
 input * repeat_rate 35
+
+bindsym Shift+Space exec "swaymsg input type:keyboard xkb_switch_layout next
 
 #
 # You can also configure each device individually.
@@ -254,7 +257,8 @@ bindsym $mod+r mode "resize"
     bindsym --locked XF86MonBrightnessDown exec brightnessctl set 5%-
     bindsym --locked XF86MonBrightnessUp exec brightnessctl set 5%+
     # Special key to take a screenshot with grim
-    bindsym Ctrl+p exec grim -g "$(slurp -d)" - | wl-copy -t image/png
+    bindsym shift+p exec grim -g "$(slurp -d)" - | wl-copy -t image/png
+    bindsym shift+f exec grim -g "$(slurp -d)"
     bindsym $mod+Shift+p exec hyprpicker -a
 #
 # Status Bar:

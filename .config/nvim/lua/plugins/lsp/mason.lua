@@ -22,6 +22,7 @@ return {
 				"lua_ls",
 				"ts_ls",
 				"wgsl_analyzer",
+				"vue_ls"
 			},
 			automatic_installation = true,
 		})

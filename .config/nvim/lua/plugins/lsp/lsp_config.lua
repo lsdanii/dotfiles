@@ -29,14 +29,48 @@ return {
 			keymap.set("n", "[g", vim.diagnostic.goto_prev)
 		end
 
-		vim.api.nvim_create_autocmd("LspAttach", {
-			callback = on_attach,
-		})
-		-- local caps = require("cmp_nvim_lsp").default_capabilities();
-		vim.lsp.config("tl_ls", {})
+		local vue_language_server_path = vim.fn.stdpath('data') ..
+			"/mason/packages/vue-language-server/node_modules/@vue/language-server"
+
+		local tsserver_filetypes = { 'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'vue' }
+
+		local vue_plugin = {
+			name = '@vue/typescript-plugin',
+			location = vue_language_server_path,
+			languages = { 'vue' },
+			configNamespace = 'typescript',
+		}
+
+		local vtsls_config = {
+			settings = {
+				vtsls = {
+					tsserver = {
+						globalPlugins = {
+							vue_plugin,
+						},
+					},
+				},
+			},
+			filetypes = tsserver_filetypes,
+		}
+
+		local ts_ls_config = {
+			init_options = {
+				plugins = {
+					vue_plugin,
+				},
+			},
+			filetypes = tsserver_filetypes,
+		}
+
+		vim.api.nvim_create_autocmd("LspAttach", { callback = on_attach })
+
+		vim.lsp.config("ts_sl", ts_ls_config)
+		vim.lsp.config("vue_ls", {})
+		vim.lsp.config("vtsls", vtsls_config)
 		vim.lsp.config("rust_analyzer", {})
 		vim.lsp.config("dartls", {})
 
-		vim.lsp.enable({ "ts_ls", "rust_analyzer", "dartls" })
+		vim.lsp.enable({ "rust_analyzer", "dartls", "vue_ls", "vtsls" })
 	end
 }
