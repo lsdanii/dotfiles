@@ -1,8 +1,7 @@
 * {
 	font-size: 15px;
-	font-family: Mononoki Nerd Font;
+	font-family: JetBrains Mono;
 	padding-bottom: 2px;
-	font-weight: bold;
 }
 
 window#waybar {

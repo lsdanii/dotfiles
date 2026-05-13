@@ -36,7 +36,7 @@ client.placeholder      #1d2021 #1d2021 #7c6f64 #1d2021   #1d2021
 #
 # Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
 # output * bg /usr/share/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png fill
-output * bg $HOME/Pictures/bg.png fill
+# output * bg $HOME/Pictures/bg.png fill
 #
 # Example configuration:
 #
@@ -73,15 +73,19 @@ exec swaymsg "workspace 2; exec alacritty;"
 #   }
 #
 
-input * {
-    xkb_layout us,es
-    xkb_options grp:toggle
+#input * {
+#    xkb_layout us,es
+#    xkb_options grp:toggle
+#}
+
+input type:keyboard {
+    xkb_layout us
+    xkb_variant altgr-intl
+    xkb_options lv3:switch
 }
 
 input * repeat_delay 350
 input * repeat_rate 35
-
-bindsym Shift+Space exec "swaymsg input type:keyboard xkb_switch_layout next
 
 #
 # You can also configure each device individually.
@@ -96,7 +100,7 @@ bindsym Shift+Space exec "swaymsg input type:keyboard xkb_switch_layout next
     bindsym $mod+o exec dolphin
 
     # Kill focused window
-    bindsym $mod+q kill
+    bindsym $mod+Shift+q kill
 
     # Start your launcher
     bindsym $mod+BackSpace exec $menu
@@ -257,9 +261,8 @@ bindsym $mod+r mode "resize"
     bindsym --locked XF86MonBrightnessDown exec brightnessctl set 5%-
     bindsym --locked XF86MonBrightnessUp exec brightnessctl set 5%+
     # Special key to take a screenshot with grim
-    bindsym shift+p exec grim -g "$(slurp -d)" - | wl-copy -t image/png
-    bindsym shift+f exec grim -g "$(slurp -d)"
-    bindsym $mod+Shift+p exec hyprpicker -a
+	bindsym $mod+Shift+o exec grim -g "$(slurp)" - | swappy -f -
+	bindsym $mod+Shift+p exec grim -g "$(slurp)" - | wl-copy
 #
 # Status Bar:
 #
