@@ -1,5 +1,5 @@
 vim.g.mapleader = " "
-vim.cmd.colorscheme("habamax")
+vim.cmd.colorscheme("retrobox")
 vim.opt.number = true
 vim.opt.relativenumber = true
 vim.opt.wrap = false
@@ -35,6 +35,14 @@ require("blink.cmp").setup({
     sources = {
         default = { "lsp", "path", "snippets", "buffer" },
     },
+    completion = {
+        menu = {
+            draw = {
+                columns = { { "label", "label_description", gap = 1 } },
+            },
+        },
+    },
+
 })
 
 vim.lsp.config("rust_analyzer", {})
@@ -43,14 +51,14 @@ vim.lsp.config("dartls", {})
 vim.lsp.enable({"rust_analyzer", "ts_ls", "dartls"})
 
 vim.api.nvim_create_autocmd("LspAttach", {
-  callback = function(args)
-    vim.api.nvim_create_autocmd("BufWritePre", {
-      buffer = args.buf,
-      callback = function()
-        vim.lsp.buf.format({ bufnr = args.buf, timeout_ms = 3000 })
-      end,
-    })
-  end,
+    callback = function(args)
+        vim.api.nvim_create_autocmd("BufWritePre", {
+            buffer = args.buf,
+            callback = function()
+                vim.lsp.buf.format({ bufnr = args.buf, timeout_ms = 3000 })
+            end,
+        })
+    end,
 })
 
 vim.keymap.set("n", "-", "<cmd>Oil<cr>", { desc = "open parent directory" })
@@ -67,4 +75,9 @@ vim.keymap.set('n', '<leader>k', vim.lsp.buf.hover, opts);
 vim.keymap.set('n', '<leader>p', vim.lsp.buf.signature_help, opts);
 vim.keymap.set("n", "]g", vim.diagnostic.goto_next)
 vim.keymap.set("n", "[g", vim.diagnostic.goto_prev)
+
+vim.keymap.set("n", "<leader>d", ":t.<CR>", {});
+vim.keymap.set("v", "<leader>d", ":t'><CR>", {});
+vim.keymap.set("t", "<Esc><Esc>", [[<C-\><C-n>]])
+
 

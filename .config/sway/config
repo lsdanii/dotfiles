@@ -35,9 +35,8 @@ client.placeholder      #1d2021 #1d2021 #7c6f64 #1d2021   #1d2021
 ### Output configuration
 #
 # Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
-# output * bg /usr/share/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png fill
-# output * bg $HOME/Pictures/bg.png fill
-#
+output * bg /usr/share/backgrounds/default.jxl fill
+
 # Example configuration:
 #
 # output HDMI-A-2 resolution 1920x1080@100Hz position 0,0
