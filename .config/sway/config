@@ -23,8 +23,8 @@ xwayland enable
 
 ### Style Configuration 
 default_border pixel 1
-gaps inner 1
-gaps outer 3
+gaps inner 0
+gaps outer 0
 
 client.focused          #928374 #1d2021 #d5c4a1 #928374   #928374
 client.focused_inactive #3c3836 #1d2021 #a89984 #3c3836   #3c3836
@@ -267,18 +267,17 @@ bindsym $mod+r mode "resize"
 #
 # Read `man 5 sway-bar` for more information about this section.
 bar {
-	swaybar_command waybar
-    # position bottom
+	# swaybar_command waybar
+    position top
     # When the status_command prints a new line to stdout, swaybar updates.
     # The default just shows the current date and time.
-    # status_command while date +'%Y-%m-%d %X'; do sleep 1; done
+    status_command while date +'%Y-%m-%d %X'; do sleep 1; done
 	# status_command ~/.sway/volume-status.sh
 
-    # colors {
-    #     statusline #ffffff
-    #     background #323232
-    #     inactive_workspace #32323200 #32323200 #5c5c5c
-    # }
+    colors {
+        statusline #ffffff
+        background #323232
+    }
 }
 
 include /etc/sway/config.d/*

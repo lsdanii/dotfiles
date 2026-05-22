@@ -17,6 +17,10 @@
       "rev": "12ddd182d9efbdc848b540f16484a583d52da0fb",
       "src": "https://github.com/mason-org/mason.nvim"
     },
+    "mini.extra": {
+      "rev": "cf027da13fd217cfe3af6ef978d0e947c7ee0f7a",
+      "src": "https://github.com/nvim-mini/mini.extra"
+    },
     "mini.pick": {
       "rev": "437d44eb57312f23e6b931704694fc294922cd88",
       "src": "https://github.com/nvim-mini/mini.pick"
